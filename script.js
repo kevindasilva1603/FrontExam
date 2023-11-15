@@ -9,6 +9,7 @@ document
         event.preventDefault()
         saveFormData()
         generatePackingList()
+        document.getElementById('resetButton').style.display = 'inline-block'
     })
 
 document.getElementById('resetButton').addEventListener('click', function () {
@@ -34,9 +35,8 @@ function loadFormData() {
         document.getElementById('climate').value = savedClimate
     }
 }
-
 function resetForm() {
-    document.getElementById('nights').value = 3
+    document.getElementById('nights').value = ''
     document.getElementById('climate').value = 'modere'
     document.getElementById('packingList').innerHTML = ''
     localStorage.removeItem('nights')
@@ -74,21 +74,21 @@ function generatePackingList() {
         listItems.push({ label: 'Chaussettes épaisses' })
     }
 
+    let packingListHTML = ''
     if (nights > 10) {
-        listItems.push({
-            label: 'Si vous partez en voyage plus de 10 nuits, faites des machines. Voyagez léger.',
-        })
+        packingListHTML += `<div class="advice-message">Si vous partez en voyage plus de 10 nuits, faites des machines. Voyagez léger.</div>`
     }
 
-    const packingList = document.getElementById('packingList')
-    packingList.innerHTML = listItems
+    packingListHTML += listItems
         .map(
-            (item) =>
-                `<div>
+            (item) => `<div>
                 <input type="checkbox" id="${item.label}" name="${item.label}">
                 <label for="${item.label}">${item.label}</label>
             </div>`
         )
         .join('')
+
+    const packingList = document.getElementById('packingList')
+    packingList.innerHTML = packingListHTML
     document.getElementById('resetButton').style.display = 'block'
 }

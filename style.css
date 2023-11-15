@@ -72,3 +72,13 @@ input[type='checkbox'] {
 #resetButton:hover {
     background: #c9302c;
 }
+
+.advice-message {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #ffffe0; /* Couleur de fond jaune clair pour le message */
+    border: 1px solid #ff0000; /* Bordure dorée */
+    border-radius: 4px;
+    font-weight: 900;
+    text-align: center;
+}
